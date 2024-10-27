@@ -3,7 +3,7 @@ pipeline{
     agent any
     stages{
         /*
-        */
+        
         stage('Build'){
             agent{
                 docker{
@@ -24,6 +24,7 @@ pipeline{
             }
 
         }
+        */
         stage("Test'"){
             agent{
                 docker{
@@ -37,6 +38,21 @@ pipeline{
                 #test -f build/index.html
                 npm test
             '''
+            }
+        }
+        stage('E2E'){
+            agnet{
+                docker{
+                    image 'mcr.microsoft.com/playwright:v1.48.1-noble'
+                }
+            }
+            steps{
+                sh'''
+                echo "in E2E stage"
+                npm install -g serve
+                serve -s build
+
+                '''
             }
         }
     }  
