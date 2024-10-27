@@ -54,7 +54,7 @@ pipeline{
                 sh'''
                 echo "in E2E stage"
                 npm install -g serve
-                serve -s build
+                node_modules/.bin/serve -s build
 
                 '''
             }
