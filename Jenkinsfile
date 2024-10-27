@@ -54,8 +54,8 @@ pipeline{
                 sh'''
                 echo "in E2E stage"
                 npm install -g serve
-                PowerShell -ExecutionPolicy Bypass
-                serve -s build
+                #PowerShell -ExecutionPolicy Bypass
+                node_modules/.bin/serve -s build
 
                 '''
             }
