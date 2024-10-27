@@ -55,7 +55,9 @@ pipeline{
                 echo "in E2E stage"
                # PowerShell -ExecutionPolicy Bypass
                 npm install -g serve
-                node_modules/.bin/serve -s build
+                node_modules/.bin/serve -s build &
+                sleep 10s
+                npx playwright test
 
                 '''
             }
