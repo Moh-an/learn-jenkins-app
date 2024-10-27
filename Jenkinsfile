@@ -46,14 +46,14 @@ pipeline{
         stage("E2E"){
             agent{
                 docker{
-                    image 'mcr.microsoft.com/playwright:v1.48.1-jammy'
+                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
                     reuseNode true
                 }
             }
             steps{
                 sh'''
                 echo "in E2E stage"
-               # PowerShell -ExecutionPolicy Bypass
+              
                 npm install  serve
 
                 node_modules/.bin/serve -s build &
