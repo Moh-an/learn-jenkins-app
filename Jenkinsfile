@@ -40,7 +40,7 @@ pipeline{
             '''
             }
         }
-        stage('E2E'){
+        stage("E2E"){
             agnet{
                 docker{
                     image 'mcr.microsoft.com/playwright:v1.48.1-noble'
