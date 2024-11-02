@@ -53,7 +53,7 @@ pipeline{
                     } 
                     }
                     
-                   stage("E2E"){
+                   stage("Unit E2E"){
                         agent{
                             docker{
                                 image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
@@ -62,7 +62,7 @@ pipeline{
                         }
                         steps{
                             sh'''
-                            echo "in E2E stage"
+                            echo "in Unit E2E stage"
                         
                             npm install  serve
 
@@ -77,7 +77,7 @@ pipeline{
                                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
                             }
                     } 
-                    }
+                }
                     
                 }  
             }
@@ -98,6 +98,29 @@ pipeline{
                 '''
             }
 
+        }
+        stage("Prod E2E"){
+                agent{
+                    docker{
+                        image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                        reuseNode true
+                    }
+                }
+                environment{
+                    CI_ENVIRONMENT_URL='https://jolly-brioche-529299.netlify.app'
+                }
+                steps{
+                    sh'''
+                    echo "in Prod E2E stage"
+                    npx playwright test --reporter=html
+
+                    '''
+                }
+                post{
+                    always{
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                    }
+            } 
         }
     }
         
