@@ -117,6 +117,12 @@ pipeline{
             }
 
         }
+        stage{
+            steps{
+                timeout(time:1,unit:'HOURS')
+                 input message: 'are you sure ', ok: 'okay, I am sure'
+            }
+        }
         stage("Prod E2E"){
                 agent{
                     docker{
