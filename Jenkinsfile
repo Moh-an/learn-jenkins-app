@@ -117,7 +117,7 @@ pipeline{
             }
 
         }
-        stage{
+        stage("Approval"){
             steps{
                 timeout(time:1,unit:'HOURS')
                  input message: 'are you sure ', ok: 'okay, I am sure'
