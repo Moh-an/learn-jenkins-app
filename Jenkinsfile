@@ -94,7 +94,7 @@ pipeline{
                 node_modules/.bin/netlify --version
                 echo "Deploying to production :Site id: $NETLIFY_SITE_ID"
                 node_modules/.bin/netlify status
-                sleep(10)
+                sleep 10
                 node_modules/.bin/netlify deploy --dir=build --json > deploy-output.json
                 
                 '''
