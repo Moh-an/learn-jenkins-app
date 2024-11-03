@@ -100,6 +100,12 @@ pipeline{
             }
 
         }
+         stage("Approval"){
+            steps{
+                timeout(time:1,unit:'MINUTES')
+                 input message: 'are you sure ', ok: 'okay, I am sure'
+            }
+        }
         stage("Prod Deploy"){
             agent{
                 docker{
@@ -118,12 +124,7 @@ pipeline{
             }
 
         }
-        stage("Approval"){
-            steps{
-                timeout(time:1,unit:'HOURS')
-                 input message: 'are you sure ', ok: 'okay, I am sure'
-            }
-        }
+       
         stage("Prod E2E"){
                 agent{
                     docker{
