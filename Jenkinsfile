@@ -1,5 +1,6 @@
 pipeline{
     // this is comment
+    agnet any
    environment {
         NETLIFY_SITE_ID = 'YOUR NETLIFY SITE ID'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
